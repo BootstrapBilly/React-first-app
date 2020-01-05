@@ -1,4 +1,5 @@
 import React from 'react';
+import Radium from "radium"
 
 const CharComponent = props => {
 
@@ -8,7 +9,15 @@ const CharComponent = props => {
         padding:"16px",
         textAlign:"center",
         margin: "16px",
-        border: "1px solid black"
+        border: "1px solid black",
+
+        
+    "@media (min-width: 800px)": {
+
+        width: "200px",
+        backgroundColor: "yellow"
+  
+      }
 
     }
 
@@ -26,4 +35,4 @@ const CharComponent = props => {
 
 
 
-export default CharComponent;
+export default Radium(CharComponent);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import styleClasses from './App.css';
 
 // import Radium, { StyleRoot } from "radium"
 import styled from "styled-components"
@@ -36,13 +36,13 @@ const App = () => {
 
   if (text.length >= 2) {
 
-    classes.push("red")
+    classes.push(styleClasses.red)
 
   }
 
   if (text.length >= 3) {
 
-    classes.push("bold")
+    classes.push(styleClasses.bold)
 
   }
 
@@ -60,7 +60,7 @@ const App = () => {
 
   }
 
-  const StyledDiv =     styled.div`
+  const StyledDiv = styled.div`
 
   padding:100px
   
@@ -72,18 +72,22 @@ const App = () => {
     // <div>
 
     <StyledDiv>
-    < input type = "text" onChange = {(text) => updateText(text)} value = { text } />
+
+      < input type="text" onChange={(text) => updateText(text)} value={text} />
 
       <p className={classes.join(" ")}>{text}</p>
 
       <Validator textLength={text.length} />
 
-        { text.split("").map(item => <CharComponent char={item} onClick={() => removeFromArray(item)} />) }
+      {text.split("").map(item => <CharComponent char={item} onClick={() => removeFromArray(item)} />)}
 
-<button style={button} onClick={() => setButtonClicked(!buttonClicked)}>I'm a button</button>
-</StyledDiv>
+      <button style={button} onClick={() => setButtonClicked(!buttonClicked)}>I'm a button</button>
 
-      // </div>
+      <p style={styleClasses.red}>Blue text</p>
+      
+    </StyledDiv>
+
+    // </div>
 
 
   )

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import styleClasses from './App.css';
+import "./App.css";
 
-// import Radium, { StyleRoot } from "radium"
-import styled from "styled-components"
+import Radium, { StyleRoot } from "radium"
 
 import Validator from "./Validator/Validator"
 import CharComponent from "./CharComponent/CharComponent"
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary"
 
 const App = () => {
 
@@ -36,13 +36,13 @@ const App = () => {
 
   if (text.length >= 2) {
 
-    classes.push(styleClasses.red)
+    classes.push("red")
 
   }
 
   if (text.length >= 3) {
 
-    classes.push(styleClasses.bold)
+    classes.push("bold")
 
   }
 
@@ -60,32 +60,38 @@ const App = () => {
 
   }
 
-  const StyledDiv = styled.div`
-
-  padding:100px
-  
-  `
 
   return (
 
 
     // <div>
 
-    <StyledDiv>
+    <StyleRoot>
 
-      < input type="text" onChange={(text) => updateText(text)} value={text} />
+      <ErrorBoundary>
 
-      <p className={classes.join(" ")}>{text}</p>
+        <div>
 
-      <Validator textLength={text.length} />
+          < input type="text" onChange={(text) => updateText(text)} value={text} />
 
-      {text.split("").map(item => <CharComponent char={item} onClick={() => removeFromArray(item)} />)}
+          <p className={classes.join(" ")}>{text}</p>
 
-      <button style={button} onClick={() => setButtonClicked(!buttonClicked)}>I'm a button</button>
+          <Validator textLength={text.length} />
 
-      <p style={styleClasses.red}>Blue text</p>
-      
-    </StyledDiv>
+          {text.split("").map(item => <CharComponent char={item} onClick={() => removeFromArray(item)} />)}
+
+          <button style={button} onClick={() => {
+            
+            throw new Error("Viper")
+            // setButtonClicked(!buttonClicked)
+            
+            }}>I'm a button</button>
+
+        </div>
+
+      </ErrorBoundary>
+
+    </StyleRoot>
 
     // </div>
 
@@ -96,4 +102,4 @@ const App = () => {
 
 
 
-export default App;
+export default Radium(App);
